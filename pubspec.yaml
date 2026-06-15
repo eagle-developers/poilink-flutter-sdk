@@ -1,0 +1,30 @@
+name: poilink_flutter_sdk
+description: "Poilink SDK for Flutter - user authentication, WebPortal display, mission progress tracking, and item grant sync. Supports iOS and Android."
+version: 1.0.0
+homepage: https://poilink.com
+repository: https://github.com/eagle-developers/poilink-flutter-sdk
+documentation: https://docs.poilink.com/
+publish_to: none
+
+environment:
+  sdk: ">=3.3.0 <4.0.0"
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  pigeon: 22.7.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.poilink.sdk.flutter
+        pluginClass: PoilinkSdkPlugin
+      ios:
+        pluginClass: PoilinkSdkPlugin

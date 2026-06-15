@@ -1,0 +1,167 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
+// swift-module-flags: -target arm64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name poilink_sdk
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
+import AVFoundation
+import AdSupport
+import AppTrackingTransparency
+import CryptoKit
+import Darwin
+import Foundation
+import Security
+import Swift
+import UIKit
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_hasMissingDesignatedInitializers @objc(PoilinkPendingItemGrantBridge) public class PendingItemGrant : ObjectiveC.NSObject {
+  @objc final public let grantId: Swift.String
+  @objc final public let itemCode: Swift.String
+  @objc final public let quantity: Swift.Int32
+  @objc final public let grantedAtUnixMs: Swift.Int64
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @objc(PoilinkSyncItemGrantsResultBridge) public class SyncItemGrantsResult : ObjectiveC.NSObject {
+  @objc final public let totalSynced: Swift.Int32
+  @objc final public let totalMarked: Swift.Int32
+  @objc final public let pageCount: Swift.Int32
+  @objc deinit
+}
+@objc(PoilinkCycleTypeBridge) public enum CycleType : Swift.Int {
+  case unspecified = 0
+  case once = 1
+  case daily = 2
+  case weekly = 3
+  case monthly = 4
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc(PoilinkRewardTypeBridge) public enum RewardType : Swift.Int {
+  case unspecified = 0
+  case point = 1
+  case appOwnedItem = 2
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc(PoilinkProgressMissionModeBridge) public enum ProgressMissionMode : Swift.Int {
+  case increase = 0
+  case atLeast = 1
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers @objc(PoilinkMissionDataBridge) public class MissionData : ObjectiveC.NSObject {
+  @objc final public let inAppMissionId: Swift.String
+  @objc final public let progressCode: Swift.String
+  @objc final public let title: Swift.String
+  @objc final public let details: Swift.String
+  @objc final public let point: Swift.Int64
+  @objc final public let targetProgress: Swift.Int32
+  @objc final public let currentProgress: Swift.Int32
+  @objc final public let hasAchievement: Swift.Bool
+  @objc final public let isClaimed: Swift.Bool
+  @objc final public let displayOrder: Swift.Int32
+  @objc final public let cycleType: poilink_sdk.CycleType
+  @objc final public let rewardType: poilink_sdk.RewardType
+  @objc final public let rewardItemCode: Swift.String
+  @objc final public let rewardItemQuantity: Swift.Int32
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc(PoilinkMissionListFilterBridge) public class MissionListFilter : ObjectiveC.NSObject {
+  @objc public var cycleType: poilink_sdk.CycleType
+  @objc public var rewardType: poilink_sdk.RewardType
+  @objc public var progressCode: Swift.String?
+  @objc(buildForNativeWithCycleType:rewardType:progressCode:) public static func buildForNative(cycleType: Swift.Int32, rewardType: Swift.Int32, progressCode: Swift.String?) -> poilink_sdk.MissionListFilter
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension poilink_sdk.PoilinkSDK {
+  @objc(_internalListPendingItemGrants:onError:) public static func _internalListPendingItemGrants(onSuccess: @escaping ([poilink_sdk.PendingItemGrant], Swift.Bool) -> Swift.Void, onError: @escaping (Swift.Int32, Swift.String) -> Swift.Void)
+  @objc(_internalMarkItemGrantsConsumed:onSuccess:onError:) public static func _internalMarkItemGrantsConsumed(grantIds: [Swift.String], onSuccess: @escaping ([Swift.String], [Swift.String]) -> Swift.Void, onError: @escaping (Swift.Int32, Swift.String) -> Swift.Void)
+  @objc(_internalShowWebPortalBridgeWithOptions:) public static func _internalShowWebPortalBridge(options: poilink_sdk.PoilinkSDK.WebPortalOptions?)
+  @objc(_internalPreloadWebPortalBridgeWithOptions:) public static func _internalPreloadWebPortalBridge(options: poilink_sdk.PoilinkSDK.WebPortalOptions?)
+}
+extension poilink_sdk.PoilinkSDK.WebPortalOptions {
+  @objc(buildForNativeWithVolume:showMode:embeddedX:embeddedY:embeddedWidth:embeddedHeight:) public static func buildForNative(volume: Swift.Float, showMode: Swift.Int32, embeddedX: Swift.Int32, embeddedY: Swift.Int32, embeddedWidth: Swift.Int32, embeddedHeight: Swift.Int32) -> poilink_sdk.PoilinkSDK.WebPortalOptions
+}
+@_inheritsConvenienceInitializers @objc public class PoilinkSDK : ObjectiveC.NSObject {
+  @objc(poilinkSetConfig:clientSecret:) public static func setConfig(clientId: Swift.String, clientSecret: Swift.String)
+  @objc(poilinkInitialize:onError:) public static func initialize(onSuccess: (() -> Swift.Void)? = nil, onError: ((Swift.Int32, Swift.String) -> Swift.Void)? = nil)
+  @objc(poilinkAuthenticate:onSuccess:onError:) public static func authenticate(appUserId: Swift.String, onSuccess: (() -> Swift.Void)? = nil, onError: ((Swift.Int32, Swift.String) -> Swift.Void)? = nil)
+  @objc(poilinkUnauthenticate) public static func unauthenticate()
+  @objc(poilinkGetRefreshTokenWithOnSuccess:onError:) public static func getRefreshToken(onSuccess: ((Swift.String) -> Swift.Void)? = nil, onError: ((Swift.Int32, Swift.String) -> Swift.Void)? = nil)
+  @objc(poilinkSetRefreshToken:refreshToken:onSuccess:onError:) public static func setRefreshToken(appUserId: Swift.String, refreshToken: Swift.String, onSuccess: (() -> Swift.Void)? = nil, onError: ((Swift.Int32, Swift.String) -> Swift.Void)? = nil)
+  @objc(poilinkProgressMission:amount:mode:onComplete:onError:) public static func progressMission(missionCode: Swift.String, amount: Swift.Int32, mode: poilink_sdk.ProgressMissionMode, onComplete: (() -> Swift.Void)? = nil, onError: ((Swift.Int32, Swift.String) -> Swift.Void)? = nil)
+  @objc(poilinkProgressMissionImmediate:amount:mode:onSuccess:onError:idempotencyKey:) public static func progressMissionImmediate(missionCode: Swift.String, amount: Swift.Int32, mode: poilink_sdk.ProgressMissionMode, onSuccess: (([poilink_sdk.MissionData]) -> Swift.Void)? = nil, onError: ((Swift.Int32, Swift.String) -> Swift.Void)? = nil, idempotencyKey: Swift.String? = nil)
+  @objc(poilinkSyncItemGrants:onComplete:onError:) public static func syncItemGrants(onGrants: @escaping ([poilink_sdk.PendingItemGrant]) -> Swift.Void, onComplete: ((poilink_sdk.SyncItemGrantsResult) -> Swift.Void)? = nil, onError: ((Swift.Int32, Swift.String) -> Swift.Void)? = nil)
+  @objc(PoilinkShowModeBridge) public enum ShowMode : Swift.Int {
+    case fullscreen = 0
+    case embedded = 1
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  @_inheritsConvenienceInitializers @objc(PoilinkWebPortalOptions) public class WebPortalOptions : ObjectiveC.NSObject {
+    @objc public var volume: Foundation.NSNumber?
+    @objc public var onClose: (() -> Swift.Void)?
+    @objc public var onError: ((Swift.Int32, Swift.String) -> Swift.Void)?
+    @objc public var onShown: (() -> Swift.Void)?
+    @objc public var showMode: poilink_sdk.PoilinkSDK.ShowMode
+    @objc public var embeddedFrame: Foundation.NSValue?
+    @objc public var onMissionChallenge: ((_ missionId: Swift.String) -> Swift.Void)?
+    @objc public var onRewardReceive: ((_ grantId: Swift.String, _ itemCode: Swift.String, _ quantity: Swift.Int) -> Swift.Void)?
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc(poilinkShowWebPortalWithOptions:) public static func showWebPortal(options: poilink_sdk.PoilinkSDK.WebPortalOptions?)
+  @objc(poilinkCloseWebPortal) public static func closeWebPortal()
+  @objc(poilinkPreloadWebPortalWithOptions:) public static func preloadWebPortal(options: poilink_sdk.PoilinkSDK.WebPortalOptions?)
+  @objc(poilinkGetMissionList:) public static func getMissionList(filter: poilink_sdk.MissionListFilter? = nil) -> [poilink_sdk.MissionData]
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum PoilinkError : Swift.Error, Foundation.LocalizedError {
+  case notInitialized
+  case configurationError(Swift.String)
+  case authenticationFailed(Swift.String)
+  case network(Swift.String)
+  case invalidResponse(Swift.String)
+  case storageError(Swift.String)
+  case timeout(Swift.String)
+  case connectionRefused(Swift.String)
+  case httpServerError(statusCode: Swift.Int, message: Swift.String, retryable: Swift.Bool)
+  case parseError(Swift.String)
+  case validationError(serverMessage: Swift.String)
+  case authRecoverable(statusCode: Swift.Int, message: Swift.String, recoveryAction: Swift.String?, reason: Swift.String?)
+  case alreadyAuthenticated(Swift.String)
+  case renderProcessGone(Swift.String)
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public var errorCode: Swift.Int {
+    get
+  }
+}
+extension poilink_sdk.CycleType : Swift.Equatable {}
+extension poilink_sdk.CycleType : Swift.Hashable {}
+extension poilink_sdk.CycleType : Swift.RawRepresentable {}
+extension poilink_sdk.RewardType : Swift.Equatable {}
+extension poilink_sdk.RewardType : Swift.Hashable {}
+extension poilink_sdk.RewardType : Swift.RawRepresentable {}
+extension poilink_sdk.ProgressMissionMode : Swift.Equatable {}
+extension poilink_sdk.ProgressMissionMode : Swift.Hashable {}
+extension poilink_sdk.ProgressMissionMode : Swift.RawRepresentable {}
+extension poilink_sdk.PoilinkSDK.ShowMode : Swift.Equatable {}
+extension poilink_sdk.PoilinkSDK.ShowMode : Swift.Hashable {}
+extension poilink_sdk.PoilinkSDK.ShowMode : Swift.RawRepresentable {}

@@ -1,0 +1,4 @@
+framework module poilink_sdk {
+  header "poilink_sdk-Swift.h"
+  requires objc
+}
